@@ -24,7 +24,7 @@ def main():
         # Read the CSV file
         with open(csv_file_name, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile)
-            headers = [h.lower().strip() for h in next(reader)]  # Get header row and convert to lowercase
+            headers = [h.lower().strip().replace('.', '_').replace('-', '_').replace(' ', '_') for h in next(reader)] # sanitize SQL improve
             
             # Drop the table if it exists
             cursor.execute(f"DROP TABLE IF EXISTS {table_name}")
